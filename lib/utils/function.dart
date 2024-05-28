@@ -17,6 +17,15 @@ navigationReplaceDelay(BuildContext context, Widget widget, int time) async {
   });
 }
 
+navigationReplace(BuildContext context, toPage) {
+  focusReq(context);
+
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => toPage),
+  );
+}
+
 navigationPush(BuildContext context, toPage) {
   focusReq(context);
   Navigator.push(
@@ -24,3 +33,9 @@ navigationPush(BuildContext context, toPage) {
     MaterialPageRoute(builder: (context) => toPage),
   );
 }
+
+navigationPop(BuildContext context, toPage) {
+  focusReq(context);
+  Navigator.pop(context, MaterialPageRoute(builder: (context) => toPage));
+}
+

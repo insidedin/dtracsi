@@ -107,7 +107,7 @@ class _LoginState extends State<Login> {
                       top: 600,
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width - 200,
-                        height: 55,
+                        height: 60,
                         child: Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: ElevatedButton(
@@ -120,7 +120,7 @@ class _LoginState extends State<Login> {
                             ),
                             child: textView(
                                 "MASUK",
-                                15,
+                                18,
                                 Colors.white,
                                 FontWeight.bold,
                                 TextAlign.start,
