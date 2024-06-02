@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1073741436736",
+    "project_id": "dtracsi",
+    "storage_bucket": "dtracsi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073741436736:android:ab1fdb8622be83f1ae8ca5",
+        "android_client_info": {
+          "package_name": "com.example.dtracsi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlqS4JvNxSz9lPqydWRrJ5bYPq6WLAE2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

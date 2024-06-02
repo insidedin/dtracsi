@@ -1,5 +1,5 @@
 import 'package:dtracsi/utils/function.dart';
-import 'package:dtracsi/views/Admin/mjsurat.dart';
+import 'package:dtracsi/views/Admin/suratpage.dart';
 import 'package:dtracsi/widgets/appbarview.dart';
 import 'package:dtracsi/widgets/inputview.dart';
 import 'package:dtracsi/widgets/textview.dart';

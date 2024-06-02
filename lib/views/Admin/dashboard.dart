@@ -1,3 +1,5 @@
+import 'package:dtracsi/utils/function.dart';
+import 'package:dtracsi/views/Login/login.dart';
 import 'package:dtracsi/widgets/dashboardview.dart';
 import 'package:dtracsi/widgets/textview.dart';
 import 'package:flutter/material.dart';
@@ -45,16 +47,28 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ),
                   ////////////
-                  Positioned(
-                    left: 30,
-                    top: 60,
-                    child: textView(
-                        "Selamat datang, Admin",
-                        16,
-                        Colors.white,
-                        FontWeight.bold,
-                        TextAlign.start,
-                        const EdgeInsets.all(0)),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(top: 50.0, left: 30.0),
+                        child: textView(
+                            "Selamat datang, Admin",
+                            16,
+                            Colors.white,
+                            FontWeight.bold,
+                            TextAlign.start,
+                            const EdgeInsets.all(0)),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(top: 50.0, left: 145.0),
+                        child: IconButton(
+                            icon: const Icon(Icons.logout_rounded),
+                            iconSize: 25,
+                            color: Colors.white,
+                            onPressed: () =>
+                                navigationPop(context, const Login())),
+                      ),
+                    ],
                   ),
                   //////////
                   Positioned(
@@ -98,9 +112,9 @@ class _DashboardState extends State<Dashboard> {
                       top: 350,
                       child: Row(
                         children: [
-                          dashboardView(150.0),
+                          dashboardView(),
                           const SizedBox(width: 25),
-                          dashboardView(150.0),
+                          dashboardView(),
                         ],
                       )),
                   /////////////
@@ -109,13 +123,20 @@ class _DashboardState extends State<Dashboard> {
                       top: 500,
                       child: Row(
                         children: [
-                          dashboardView(150.0),
+                          dashboardView(),
                           const SizedBox(width: 25),
-                          dashboardView(150.0),
+                          dashboardView(),
                         ],
                       )),
                   /////////////
-                  dashboardView(650.0)
+                  Positioned(
+                      left: 35,
+                      top: 650,
+                      child: Row(
+                        children: [
+                          dashboardView(),
+                        ],
+                      )),
                 ],
               ),
             ),

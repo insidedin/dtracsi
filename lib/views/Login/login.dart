@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dtracsi/views/Home/home.dart';
+import 'package:dtracsi/views/Home/homeuser.dart';
 import 'package:dtracsi/widgets/inputview.dart';
 import 'package:dtracsi/widgets/textview.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -10,9 +14,60 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   bool passwordVisible = false;
+
+  Future<void> login() async {
+    String username = usernameController.text.trim();
+    String password = passwordController.text.trim();
+
+    try {
+    QuerySnapshot userSnapshot = await firestore
+    .collection('users')
+    .where('username', isEqualTo: username)
+    .limit(1)
+    .get();
+
+    if (userSnapshot.docs.isNotEmpty) {
+      var userDoc = userSnapshot.docs[0];
+      var userData = userDoc.data() as Map<String, dynamic>;
+
+      if (userData['password'] == password){
+        String role = userData['role'];
+
+        if (role == 'admin') {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const Home()),
+            );
+          } else if (role == 'user') {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeUser()),
+            );
+          }
+      } else {
+          // Handle wrong password
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Password salah')),
+          );
+        }
+    } else {
+        // Handle user not found
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Username tidak ditemukan')),
+        );
+      }
+  }catch (e) {
+      // Handle errors
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +155,8 @@ class _LoginState extends State<Login> {
                     //////////
                     inputUserController(usernameController, context),
                     ///////////
-                    inputPasswordController(passwordController, context),
+                    inputPasswordController(
+                        passwordController, passwordVisible, setState, context),
                     ///////////
                     Positioned(
                       left: 100,
@@ -111,7 +167,7 @@ class _LoginState extends State<Login> {
                         child: Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: login,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF315A8A),
                               shape: RoundedRectangleBorder(

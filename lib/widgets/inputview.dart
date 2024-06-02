@@ -18,9 +18,9 @@ inputUserController(controller, context) {
           fontSize: 16,
         ),
         decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.person,
+            prefixIcon: const Icon(Icons.email_rounded,
                 color: Color.fromARGB(255, 142, 142, 142), size: 22),
-            labelText: 'Username',
+            labelText: 'Email',
             labelStyle: GoogleFonts.poppins(
               color: const Color.fromARGB(255, 198, 198, 198),
               fontSize: 16,
@@ -44,7 +44,7 @@ inputUserController(controller, context) {
 }
 
 /////////////////
-inputPasswordController(controller, context) {
+inputPasswordController(controller, passwordVisible, setState, context) {
   return Positioned(
     left: 50,
     top: 490,
@@ -63,6 +63,18 @@ inputPasswordController(controller, context) {
         decoration: InputDecoration(
             prefixIcon: const Icon(Icons.lock,
                 color: Color.fromARGB(255, 142, 142, 142), size: 20),
+            suffixIcon: IconButton(
+              icon: Icon(
+                passwordVisible ? Icons.visibility : Icons.visibility_off,
+                color: const Color.fromARGB(255, 142, 142, 142),
+                size: 22,
+              ),
+              onPressed: () {
+                setState(() {
+                  passwordVisible = !passwordVisible;
+                });
+              },
+            ),
             labelText: 'Password',
             labelStyle: GoogleFonts.poppins(
               color: const Color.fromARGB(255, 198, 198, 198),
@@ -118,3 +130,34 @@ inputController(controller, label, context) {
   );
 }
 
+//////////////
+inputtanggalController(controller, label, context) {
+  return TextField(
+    controller: controller,
+    textInputAction: TextInputAction.next,
+    textAlign: TextAlign.left,
+    style: GoogleFonts.poppins(
+      color: Colors.black,
+      fontSize: 15,
+    ),
+    decoration: InputDecoration(
+        labelText: label,
+        labelStyle: GoogleFonts.poppins(
+          color: const Color.fromARGB(255, 151, 151, 151),
+          fontSize: 14,
+        ),
+        fillColor: const Color.fromARGB(255, 232, 232, 232),
+        filled: true,
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.white),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Colors.white,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        floatingLabelBehavior: FloatingLabelBehavior.never),
+  );
+}

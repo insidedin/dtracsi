@@ -4,28 +4,40 @@ import 'package:dtracsi/views/Admin/userpage.dart';
 import 'package:dtracsi/widgets/appbarview.dart';
 import 'package:flutter/material.dart';
 
-class TambahUser extends StatefulWidget {
-  const TambahUser({super.key});
+class EditUser extends StatefulWidget {
+  final DocumentSnapshot userDoc;
+
+  const EditUser(this.userDoc, {super.key});
 
   @override
-  State<TambahUser> createState() => _TambahUserState();
+  State<EditUser> createState() => _EditUserState();
 }
 
-class _TambahUserState extends State<TambahUser> {
+class _EditUserState extends State<EditUser> {
   final formKey = GlobalKey<FormState>();
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController timkerjaController = TextEditingController();
-  String role = 'user';
+  late TextEditingController usernameController;
+  late TextEditingController passwordController;
+  late TextEditingController timkerjaController;
+  late String role;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  void submit (){
-      if (formKey.currentState!.validate()) {
+  @override
+  void initState() {
+    super.initState();
+    var userData = widget.userDoc.data() as Map<String, dynamic>;
+    usernameController = TextEditingController(text: userData['username']);
+    passwordController = TextEditingController(text: userData['password']);
+    timkerjaController = TextEditingController(text: userData['timkerja']);
+    role = userData['role'];
+  }
+
+  void submit() {
+    if (formKey.currentState!.validate()) {
       String username = usernameController.text.trim();
       String password = passwordController.text.trim();
       String timkerja = timkerjaController.text.trim();
 
-      firestore.collection('users').add({
+      firestore.collection('users').doc(widget.userDoc.id).update({
         'username': username,
         'password': password,
         'timkerja': timkerja,
@@ -40,7 +52,7 @@ class _TambahUserState extends State<TambahUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarCustom2(
-          "Tambah User Baru", () => navigationPop(context, const UserPage())),
+          "Edit User", () => navigationPop(context, const UserPage())),
       backgroundColor: Colors.white,
       body: Padding(        padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -96,12 +108,12 @@ class _TambahUserState extends State<TambahUser> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: submit,
-                child: const Text('Add User'),
+                child: const Text('Save Changes'),
               ),
             ],
           ),
         ),
-        ),
+      )
     );
   }
 }
