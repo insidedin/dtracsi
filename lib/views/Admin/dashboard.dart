@@ -112,9 +112,9 @@ class _DashboardState extends State<Dashboard> {
                       top: 350,
                       child: Row(
                         children: [
-                          dashboardView(),
+                          dashboardMasuk(21),
                           const SizedBox(width: 25),
-                          dashboardView(),
+                          dashboardSetujui(12),
                         ],
                       )),
                   /////////////
@@ -123,9 +123,9 @@ class _DashboardState extends State<Dashboard> {
                       top: 500,
                       child: Row(
                         children: [
-                          dashboardView(),
+                          dashboardDistribusi(12),
                           const SizedBox(width: 25),
-                          dashboardView(),
+                          dashboardDiproses(45),
                         ],
                       )),
                   /////////////
@@ -134,7 +134,7 @@ class _DashboardState extends State<Dashboard> {
                       top: 650,
                       child: Row(
                         children: [
-                          dashboardView(),
+                          dashboardSelesai(45),
                         ],
                       )),
                 ],

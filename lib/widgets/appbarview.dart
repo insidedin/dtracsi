@@ -95,7 +95,7 @@ appBarCustom2(String nama, ditekan) {
         ),
       ),
       textView(nama, 17, const Color(0xFF315A8A), FontWeight.bold,
-          TextAlign.start, const EdgeInsets.only(right: 110))
+          TextAlign.start, const EdgeInsets.only(right: 120))
     ]),
     shape: const RoundedRectangleBorder(
       borderRadius:
