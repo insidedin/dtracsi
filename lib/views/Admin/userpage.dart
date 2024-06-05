@@ -81,7 +81,7 @@ class _UserPageState extends State<UserPage> {
                         onPressed: () => deleteUser(userDoc.id),
                         icon: const Icon(
                           Icons.delete_rounded,
-                          color: Colors.black,
+                          color: Colors.redAccent,
                         ))
                   ],
                 ),

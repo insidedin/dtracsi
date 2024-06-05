@@ -152,7 +152,7 @@ class _TambahUserState extends State<TambahUser> {
                     floatingLabelBehavior: FloatingLabelBehavior.never),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Tim Kerja belum diinputkan';
+                    return 'Tim Kerja belum diinputkan!';
                   }
                   return null;
                 },

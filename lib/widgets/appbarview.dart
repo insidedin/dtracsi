@@ -104,3 +104,26 @@ appBarCustom2(String nama, ditekan) {
     automaticallyImplyLeading: false,
   );
 }
+
+appBarCustom3(String nama, ditekan) {
+  return AppBar(
+    elevation: 0,
+    backgroundColor: Colors.white,
+    title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      SizedBox(
+        height: 50,
+        child: IconButton(
+          icon: const Icon(Icons.cancel, color: Color(0xFF315A8A), size: 27.0),
+          onPressed: ditekan,
+        ),
+      ),
+      textView(nama, 17, const Color(0xFF315A8A), FontWeight.bold,
+          TextAlign.start, const EdgeInsets.only(right: 160))
+    ]),
+    shape: const RoundedRectangleBorder(
+      borderRadius:
+          BorderRadius.only(bottomLeft: Radius.zero, bottomRight: Radius.zero),
+    ),
+    automaticallyImplyLeading: false,
+  );
+}
