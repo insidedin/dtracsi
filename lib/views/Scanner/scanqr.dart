@@ -1,5 +1,5 @@
 import 'package:dtracsi/utils/function.dart';
-import 'package:dtracsi/views/Admin/dashboard.dart';
+import 'package:dtracsi/views/AdminPage/dashboardpage.dart';
 import 'package:dtracsi/widgets/appbarview.dart';
 import 'package:flutter/material.dart';
 

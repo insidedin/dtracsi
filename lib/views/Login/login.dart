@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dtracsi/views/Home/home.dart';
-import 'package:dtracsi/views/Home/homeuser.dart';
+import 'package:dtracsi/views/HomePage/home.dart';
+import 'package:dtracsi/views/HomePage/homeuser.dart';
 import 'package:dtracsi/widgets/inputview.dart';
 import 'package:dtracsi/widgets/textview.dart';
 import 'package:firebase_auth/firebase_auth.dart';

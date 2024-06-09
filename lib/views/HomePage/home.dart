@@ -1,7 +1,7 @@
-import 'package:dtracsi/views/Admin/dashboard.dart';
-import 'package:dtracsi/views/Admin/suratpage.dart';
-import 'package:dtracsi/views/Admin/trackingpage.dart';
-import 'package:dtracsi/views/Admin/userpage.dart';
+import 'package:dtracsi/views/AdminPage/dashboardpage.dart';
+import 'package:dtracsi/views/AdminPage/suratpage.dart';
+import 'package:dtracsi/views/AdminPage/trackingpage.dart';
+import 'package:dtracsi/views/AdminPage/userpage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dtracsi/utils/function.dart';
-import 'package:dtracsi/views/Admin/edituser.dart';
-import 'package:dtracsi/views/Admin/tambahuser.dart';
+import 'package:dtracsi/views/AdminUse/edituser.dart';
+import 'package:dtracsi/views/AdminUse/tambahuser.dart';
 import 'package:dtracsi/widgets/appbarview.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

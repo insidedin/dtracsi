@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dtracsi/utils/function.dart';
-import 'package:dtracsi/views/Admin/userpage.dart';
+import 'package:dtracsi/views/AdminPage/userpage.dart';
 import 'package:dtracsi/widgets/appbarview.dart';
 import 'package:dtracsi/widgets/textview.dart';
 import 'package:flutter/material.dart';

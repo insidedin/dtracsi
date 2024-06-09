@@ -1,5 +1,5 @@
-import 'package:dtracsi/views/User/dashuser.dart';
-import 'package:dtracsi/views/User/suratuser.dart';
+import 'package:dtracsi/views/UsersPage/dashuser.dart';
+import 'package:dtracsi/views/UsersPage/suratuser.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

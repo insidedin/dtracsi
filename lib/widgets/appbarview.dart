@@ -71,7 +71,7 @@ appBarCustom(String nama) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         textView(nama, 17, const Color(0xFF315A8A), FontWeight.bold,
-            TextAlign.start, const EdgeInsets.only(left: 13)),
+            TextAlign.start, const EdgeInsets.only(left: 10)),
       ],
     ),
     shape: const RoundedRectangleBorder(
