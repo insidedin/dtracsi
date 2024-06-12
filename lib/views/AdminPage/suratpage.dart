@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dtracsi/utils/function.dart';
 import 'package:dtracsi/views/AdminUse/cetaksurat.dart';
@@ -19,6 +17,83 @@ class ManSurat extends StatefulWidget {
 
 class _ManSuratState extends State<ManSurat> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  void deleteSurat(String documentId) async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF315A8A),
+          title: textView(
+            "Hapus Surat",
+            18,
+            Colors.white,
+            FontWeight.bold,
+            TextAlign.start,
+            EdgeInsets.zero,
+          ),
+          content: textView(
+            "Anda yakin ingin menghapus surat ini?",
+            16,
+            Colors.white,
+            FontWeight.normal,
+            TextAlign.start,
+            EdgeInsets.zero,
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: textView(
+                "Batal",
+                16,
+                Colors.white,
+                FontWeight.normal,
+                TextAlign.start,
+                EdgeInsets.zero,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: textView(
+                "Hapus",
+                16,
+                Colors.white,
+                FontWeight.bold,
+                TextAlign.start,
+                EdgeInsets.zero,
+              ),
+              onPressed: () async {
+                try {
+                  await firestore.collection('surat').doc(documentId).delete();
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Surat berhasil dihapus')),
+                  );
+                } catch (e) {
+                  print("Error deleting document: $e");
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Gagal menghapus surat')),
+                  );
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void editSurat(Map<String, dynamic> suratData, String documentId) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            EditSurat(documentId: documentId, suratData: suratData),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,48 +116,55 @@ class _ManSuratState extends State<ManSurat> {
               var data = doc.data() as Map<String, dynamic>;
               return ListTile(
                 contentPadding: const EdgeInsets.only(left: 25.0, right: 10.0),
-                title: Text(data['asal_surat'],
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: GoogleFonts.poppins().fontFamily,
-                    )),
-                subtitle: Text(data['perihal'],
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: GoogleFonts.poppins().fontFamily,
-                    )),
-                trailing: PopupMenuButton(
+                title: Text(
+                  data['asal_surat'],
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: GoogleFonts.poppins().fontFamily,
+                  ),
+                ),
+                subtitle: Text(
+                  data['perihal'],
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: GoogleFonts.poppins().fontFamily,
+                  ),
+                ),
+                trailing: PopupMenuButton<String>(
                   itemBuilder: (BuildContext context) =>
                       <PopupMenuEntry<String>>[
                     PopupMenuItem<String>(
-                        value: 'edit',
-                        child: ListTile(
-                          leading: const Icon(Icons.edit),
-                          title: textView(
-                              "Edit",
-                              12,
-                              Colors.black,
-                              FontWeight.w500,
-                              TextAlign.start,
-                              const EdgeInsets.all(0)),
-                        )),
+                      value: 'edit',
+                      child: ListTile(
+                        leading: const Icon(Icons.edit_document),
+                        title: textView(
+                          "Edit",
+                          14,
+                          Colors.black,
+                          FontWeight.w500,
+                          TextAlign.start,
+                          const EdgeInsets.all(0),
+                        ),
+                      ),
+                    ),
                     PopupMenuItem<String>(
                       value: 'delete',
                       child: ListTile(
-                        leading: const Icon(Icons.delete),
+                        leading: const Icon(Icons.delete_forever_rounded),
                         title: textView(
-                            "Delete",
-                            12,
-                            Colors.black,
-                            FontWeight.w500,
-                            TextAlign.start,
-                            const EdgeInsets.all(0)),
+                          "Hapus",
+                          14,
+                          Colors.black,
+                          FontWeight.w500,
+                          TextAlign.start,
+                          const EdgeInsets.all(0),
+                        ),
                       ),
                     ),
                   ],
                   onSelected: (String value) {
                     if (value == 'edit') {
-                      editSurat(data);
+                      editSurat(data, doc.id);
                     } else if (value == 'delete') {
                       deleteSurat(doc.id);
                     }
@@ -110,47 +192,4 @@ class _ManSuratState extends State<ManSurat> {
       ),
     );
   }
-}
-
-void editSurat(Map<String, dynamic> suratData) {
-  Navigator.push(
-    context as BuildContext,
-    MaterialPageRoute(
-      builder: (context) => EditSurat(suratData: suratData),
-    ),
-  );
-}
-
-void deleteSurat(String docId) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text("Hapus Surat"),
-        content: Text("Anda yakin ingin menghapus surat ini?"),
-        actions: <Widget>[
-          TextButton(
-            child: Text("Batal"),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
-            child: Text("Hapus"),
-            onPressed: () async {
-              try {
-                await FirebaseFirestore.instance.collection('surat').doc(docId).delete();
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Surat berhasil dihapus')));
-              } catch (e) {
-                print("Error deleting document: $e");
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Gagal menghapus surat')));
-              }
-            },
-          ),
-        ],
-      );
-    },
-  );
 }

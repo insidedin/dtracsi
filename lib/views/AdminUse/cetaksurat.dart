@@ -76,7 +76,8 @@ class CetakSurat extends StatelessWidget {
                 pw.Positioned(
                   top: 248,
                   left: 145,
-                  child: pw.Text(perihal, style: const pw.TextStyle(fontSize: 12)),
+                  child:
+                      pw.Text(perihal, style: const pw.TextStyle(fontSize: 12)),
                 ),
                 pw.Positioned(
                   top: 272,
@@ -87,14 +88,14 @@ class CetakSurat extends StatelessWidget {
                 pw.Positioned(
                   top: 293,
                   left: 145,
-                  child:
-                      pw.Text(nomorSurat, style: const pw.TextStyle(fontSize: 12)),
+                  child: pw.Text(nomorSurat,
+                      style: const pw.TextStyle(fontSize: 12)),
                 ),
                 pw.Positioned(
                   top: 325,
                   left: 145,
-                  child:
-                      pw.Text(asalSurat, style: const pw.TextStyle(fontSize: 12)),
+                  child: pw.Text(asalSurat,
+                      style: const pw.TextStyle(fontSize: 12)),
                 ),
               ],
             );
