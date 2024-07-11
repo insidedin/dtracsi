@@ -1,7 +1,7 @@
 import 'package:dtracsi/widgets/textview.dart';
 import 'package:flutter/material.dart';
 
-dashboardView() {
+dashboardView({required int value}) {
   return Container(
     width: 160,
     height: 130,

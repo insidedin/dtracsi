@@ -42,7 +42,7 @@ class _TambahUserState extends State<TambahUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarCustom2(
-          "Tambah User Baru", () => navigationPop(context, const UserPage())),
+          "Tambah User Baru", () => navigationPop(context, const UserPage()), const EdgeInsets.only(right: 120)),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),

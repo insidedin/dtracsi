@@ -2,6 +2,7 @@ import 'package:dtracsi/views/AdminPage/dashboardpage.dart';
 import 'package:dtracsi/views/AdminPage/suratpage.dart';
 import 'package:dtracsi/views/AdminPage/trackingpage.dart';
 import 'package:dtracsi/views/AdminPage/userpage.dart';
+import 'package:dtracsi/views/Scanner/scanqr.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -180,7 +181,12 @@ class _HomeState extends State<Home> {
         height: 70,
         width: 70,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Scan()),
+            );
+          },
           backgroundColor: const Color(0xFF315A8A),
           shape: const CircleBorder(),
           child: const Icon(

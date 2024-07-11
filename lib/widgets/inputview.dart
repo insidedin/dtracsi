@@ -18,9 +18,9 @@ inputUserController(controller, context) {
           fontSize: 16,
         ),
         decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.email_rounded,
+            prefixIcon: const Icon(Icons.person_2_rounded,
                 color: Color.fromARGB(255, 142, 142, 142), size: 22),
-            labelText: 'Email',
+            labelText: 'Username',
             labelStyle: GoogleFonts.poppins(
               color: const Color.fromARGB(255, 198, 198, 198),
               fontSize: 16,
@@ -99,7 +99,11 @@ inputPasswordController(controller, passwordVisible, setState, context) {
 }
 
 /////////////////
-inputController(controller, label, context) {
+inputController(
+  controller,
+  label,
+  context,
+) {
   return TextField(
     controller: controller,
     textInputAction: TextInputAction.next,
@@ -109,24 +113,24 @@ inputController(controller, label, context) {
       fontSize: 15,
     ),
     decoration: InputDecoration(
-        labelText: label,
-        labelStyle: GoogleFonts.poppins(
-          color: const Color.fromARGB(255, 151, 151, 151),
-          fontSize: 14,
+      labelText: label,
+      labelStyle: GoogleFonts.poppins(
+        color: const Color.fromARGB(255, 151, 151, 151),
+        fontSize: 14,
+      ),
+      fillColor: const Color.fromARGB(255, 232, 232, 232),
+      filled: true,
+      enabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.white),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Color.fromARGB(255, 151, 151, 151),
         ),
-        fillColor: const Color.fromARGB(255, 232, 232, 232),
-        filled: true,
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.white,
-          ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.never),
+        borderRadius: BorderRadius.circular(10),
+      ),
+    ),
   );
 }
 
@@ -159,5 +163,38 @@ inputtanggalController(controller, label, context) {
           borderRadius: BorderRadius.circular(10),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never),
+  );
+}
+
+////////
+dropdownField(
+  String value,
+  String labelText,
+  List<DropdownMenuItem<String>> items,
+  ValueChanged<String?> onChanged,
+) {
+  return DropdownButtonFormField<String>(
+    value: value,
+    items: items,
+    onChanged: onChanged,
+    decoration: InputDecoration(
+      labelText: labelText,
+      labelStyle: GoogleFonts.poppins(
+        color: const Color.fromARGB(255, 151, 151, 151),
+        fontSize: 14,
+      ),
+      fillColor: const Color.fromARGB(255, 232, 232, 232),
+      filled: true,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: const BorderSide(color: Colors.white),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: const BorderSide(
+          color: Colors.white,
+        ),
+      ),
+    ),
   );
 }

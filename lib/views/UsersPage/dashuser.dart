@@ -1,7 +1,8 @@
-import 'package:dtracsi/utils/function.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dtracsi/views/Login/login.dart';
 import 'package:dtracsi/widgets/dashboardview.dart';
 import 'package:dtracsi/widgets/textview.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class DashboardUser extends StatefulWidget {
@@ -12,6 +13,37 @@ class DashboardUser extends StatefulWidget {
 }
 
 class _DashboardUserState extends State<DashboardUser> {
+  String welcomeText = "Selamat datang, User";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData(); // Panggil metode untuk mengambil data pengguna
+  }
+
+  void fetchUserData() async {
+    // Dapatkan pengguna yang sedang login
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      // Dapatkan data pengguna dari Firestore berdasarkan UID
+      DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      // Ambil nilai tim_kerja dari data pengguna
+      String? timKerja = userSnapshot['timkerja'];
+
+      if (timKerja != null) {
+        // Update teks selamat datang berdasarkan tim_kerja
+        setState(() {
+          welcomeText = "Selamat datang, $timKerja";
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +84,7 @@ class _DashboardUserState extends State<DashboardUser> {
                       Container(
                         padding: const EdgeInsets.only(top: 50.0, left: 30.0),
                         child: textView(
-                            "Selamat datang, User",
+                            welcomeText,
                             16,
                             Colors.white,
                             FontWeight.bold,
@@ -65,8 +97,12 @@ class _DashboardUserState extends State<DashboardUser> {
                             icon: const Icon(Icons.logout_rounded),
                             iconSize: 25,
                             color: Colors.white,
-                            onPressed: () =>
-                                navigationPop(context, const Login())),
+                            onPressed: (() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Login()));
+                            })),
                       ),
                     ],
                   ),
@@ -112,9 +148,9 @@ class _DashboardUserState extends State<DashboardUser> {
                       top: 350,
                       child: Row(
                         children: [
-                          dashboardView(),
+                          dashboardSetujui(1),
                           const SizedBox(width: 25),
-                          dashboardView(),
+                          dashboardDistribusi(0),
                         ],
                       )),
                   /////////////
@@ -123,7 +159,9 @@ class _DashboardUserState extends State<DashboardUser> {
                       top: 500,
                       child: Row(
                         children: [
-                          dashboardView(),
+                          dashboardDiproses(0),
+                          const SizedBox(width: 25),
+                          dashboardSelesai(1),
                         ],
                       )),
                 ],

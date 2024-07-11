@@ -1,3 +1,4 @@
+import 'package:dtracsi/views/Scanner/scanqr.dart';
 import 'package:dtracsi/views/UsersPage/dashuser.dart';
 import 'package:dtracsi/views/UsersPage/suratuser.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,12 @@ class _HomeUserState extends State<HomeUser> {
         height: 70,
         width: 70,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Scan()),
+            );
+          },
           backgroundColor: const Color(0xFF315A8A),
           shape: const CircleBorder(),
           child: const Icon(

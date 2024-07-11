@@ -82,7 +82,7 @@ appBarCustom(String nama) {
   );
 }
 
-appBarCustom2(String nama, ditekan) {
+appBarCustom2(String nama, ditekan, ukuran) {
   return AppBar(
     elevation: 0,
     backgroundColor: Colors.white,
@@ -95,7 +95,7 @@ appBarCustom2(String nama, ditekan) {
         ),
       ),
       textView(nama, 17, const Color(0xFF315A8A), FontWeight.bold,
-          TextAlign.start, const EdgeInsets.only(right: 120))
+          TextAlign.start, ukuran)
     ]),
     shape: const RoundedRectangleBorder(
       borderRadius:
@@ -127,3 +127,5 @@ appBarCustom3(String nama, ditekan) {
     automaticallyImplyLeading: false,
   );
 }
+
+

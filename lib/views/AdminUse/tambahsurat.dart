@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dtracsi/utils/function.dart';
-import 'package:dtracsi/views/AdminPage/suratpage.dart';
-import 'package:dtracsi/views/AdminUse/cetaksurat.dart';
-import 'package:dtracsi/widgets/appbarview.dart';
-import 'package:dtracsi/widgets/textview.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:dtracsi/widgets/appbarview.dart';
+import 'package:dtracsi/widgets/textview.dart';
+import 'package:dtracsi/views/AdminUse/cetaksurat.dart';
 
 class TambahSurat extends StatefulWidget {
   const TambahSurat({super.key});
@@ -22,7 +20,7 @@ class _TambahSuratState extends State<TambahSurat> {
   final TextEditingController nomorsuratController = TextEditingController();
   final TextEditingController asalsuratController = TextEditingController();
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  int nomorAgenda = 1110; //// No agenda awal
+  int nomorAgenda = 1110; // No agenda awal
 
   Future<void> _getLastNomorAgenda() async {
     QuerySnapshot snapshot = await firestore
@@ -58,6 +56,14 @@ class _TambahSuratState extends State<TambahSurat> {
         'asal_surat': asalSurat,
       });
 
+      await firestore.collection('disposisi').doc(nomorAgenda.toString()).set({
+        'nomor_agenda': nomorAgenda,
+        'tanggal_disposisi': tanggalTerima,
+        'disposisi': 'Diterima',
+        'status': 'diterima',
+        'assigned_to': 'ult',
+      });
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -81,8 +87,8 @@ class _TambahSuratState extends State<TambahSurat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCustom2(
-          "Tambah Surat Masuk", () => navigationPop(context, const ManSurat())),
+      appBar: appBarCustom2("Tambah Surat Masuk", () => Navigator.pop(context),
+          const EdgeInsets.only(right: 110)),
       backgroundColor: Colors.white,
       body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -92,7 +98,6 @@ class _TambahSuratState extends State<TambahSurat> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 18),
-                ////////// form tanggal terima
                 TextFormField(
                   controller: tanggalterimaController,
                   textInputAction: TextInputAction.next,
@@ -128,7 +133,6 @@ class _TambahSuratState extends State<TambahSurat> {
                   },
                 ),
                 const SizedBox(height: 18),
-                ////////// form perihal surat
                 TextFormField(
                   controller: perihalController,
                   textInputAction: TextInputAction.next,
@@ -164,7 +168,6 @@ class _TambahSuratState extends State<TambahSurat> {
                   },
                 ),
                 const SizedBox(height: 18),
-                ////////// form tanggal surat
                 TextFormField(
                   controller: tanggalsuratController,
                   textInputAction: TextInputAction.next,
@@ -200,7 +203,6 @@ class _TambahSuratState extends State<TambahSurat> {
                   },
                 ),
                 const SizedBox(height: 18),
-                ////////// form nomor surat
                 TextFormField(
                   controller: nomorsuratController,
                   textInputAction: TextInputAction.next,
@@ -236,10 +238,9 @@ class _TambahSuratState extends State<TambahSurat> {
                   },
                 ),
                 const SizedBox(height: 18),
-                ////////// form asal surat
                 TextFormField(
                   controller: asalsuratController,
-                  textInputAction: TextInputAction.next,
+                  textInputAction: TextInputAction.done,
                   textAlign: TextAlign.left,
                   style: GoogleFonts.poppins(
                     color: Colors.black,
@@ -266,7 +267,7 @@ class _TambahSuratState extends State<TambahSurat> {
                       floatingLabelBehavior: FloatingLabelBehavior.never),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Inputkan Asal!';
+                      return 'Inputkan Asal Surat!';
                     }
                     return null;
                   },
@@ -285,12 +286,13 @@ class _TambahSuratState extends State<TambahSurat> {
                         ),
                       ),
                       child: textView(
-                          "Simpan",
-                          16,
-                          Colors.white,
-                          FontWeight.bold,
-                          TextAlign.start,
-                          const EdgeInsets.all(0)),
+                        "Simpan Surat",
+                        16,
+                        Colors.white,
+                        FontWeight.bold,
+                        TextAlign.start,
+                        const EdgeInsets.all(0),
+                      ),
                     ),
                   ),
                 ),

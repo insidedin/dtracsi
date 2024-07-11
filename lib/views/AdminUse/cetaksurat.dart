@@ -1,4 +1,5 @@
 import 'package:dtracsi/widgets/appbarview.dart';
+import 'package:dtracsi/widgets/buttonview.dart';
 import 'package:dtracsi/widgets/textview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -109,78 +110,80 @@ class CetakSurat extends StatelessWidget {
     return Scaffold(
       appBar: appBarCustom(asalSurat),
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.only(left: 25.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Screenshot(
-                controller: screenshotController,
-                child: QrImageView(
-                  data: qrData,
-                  version: QrVersions.auto,
-                  size: 200.0,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Screenshot(
+                  controller: screenshotController,
+                  child: QrImageView(
+                    data: qrData,
+                    version: QrVersions.auto,
+                    size: 200.0,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 15),
-            textView("Nomor Agenda   : $nomorAgenda ", 16, Colors.black,
-                FontWeight.w600, TextAlign.start, const EdgeInsets.all(0)),
-            const SizedBox(height: 10),
-            textView("Tanggal Terima : $tanggalTerima ", 16, Colors.black,
-                FontWeight.w600, TextAlign.start, const EdgeInsets.all(0)),
-            const SizedBox(height: 10),
-            textView("Perihal                   : $perihal ", 16, Colors.black,
-                FontWeight.w600, TextAlign.start, const EdgeInsets.all(0)),
-            const SizedBox(height: 10),
-            textView("Tanggal Surat    : $tanggalSurat ", 16, Colors.black,
-                FontWeight.w600, TextAlign.start, const EdgeInsets.all(0)),
-            const SizedBox(height: 10),
-            textView("Nomor Surat       : $nomorSurat ", 16, Colors.black,
-                FontWeight.w600, TextAlign.start, const EdgeInsets.all(0)),
-            const SizedBox(height: 10),
-            textView("Asal Surat            : $asalSurat", 16, Colors.black,
-                FontWeight.w600, TextAlign.start, const EdgeInsets.all(0)),
-            const SizedBox(height: 20),
-            Center(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                ),
-                onPressed: () async {
-                  final pdfData = await generatePdf(PdfPageFormat.a4);
-                  await Printing.layoutPdf(
-                    onLayout: (format) => pdfData,
-                  );
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(Icons.print, color: Colors.white),
-                    const SizedBox(width: 8),
-                    textView(
-                        "Cetak Lembar Disposisi",
-                        14,
-                        Colors.white,
-                        FontWeight.w600,
-                        TextAlign.start,
-                        const EdgeInsets.all(0)),
-                  ],
+              const SizedBox(height: 15),
+              textView("Nomor Agenda   : $nomorAgenda ", 16, Colors.black,
+                  FontWeight.w600, TextAlign.start, const EdgeInsets.all(0)),
+              const SizedBox(height: 10),
+              textView("Tanggal Terima : $tanggalTerima ", 16, Colors.black,
+                  FontWeight.w600, TextAlign.start, const EdgeInsets.all(0)),
+              const SizedBox(height: 10),
+              textView(
+                  "Perihal                   : $perihal ",
+                  16,
+                  Colors.black,
+                  FontWeight.w600,
+                  TextAlign.start,
+                  const EdgeInsets.all(0)),
+              const SizedBox(height: 10),
+              textView("Tanggal Surat    : $tanggalSurat ", 16, Colors.black,
+                  FontWeight.w600, TextAlign.start, const EdgeInsets.all(0)),
+              const SizedBox(height: 10),
+              textView("Nomor Surat       : $nomorSurat ", 16, Colors.black,
+                  FontWeight.w600, TextAlign.start, const EdgeInsets.all(0)),
+              const SizedBox(height: 10),
+              textView("Asal Surat            : $asalSurat", 16, Colors.black,
+                  FontWeight.w600, TextAlign.start, const EdgeInsets.all(0)),
+              const SizedBox(height: 30),
+              Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(horizontal: 90.0),
+                  ),
+                  onPressed: () async {
+                    final pdfData = await generatePdf(PdfPageFormat.a4);
+                    await Printing.layoutPdf(
+                      onLayout: (format) => pdfData,
+                    );
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      const Icon(Icons.print, color: Colors.white),
+                      const SizedBox(width: 8),
+                      textView(
+                          "Cetak Lembar Disposisi",
+                          14,
+                          Colors.white,
+                          FontWeight.w600,
+                          TextAlign.start,
+                          const EdgeInsets.all(0)),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Tutup'),
-              ),
-            ),
-          ],
+              const SizedBox(height: 200),
+              fullButton(() {
+                Navigator.of(context).pop();
+              }, "Tutup")
+            ],
+          ),
         ),
       ),
     );
