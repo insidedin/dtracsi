@@ -107,24 +107,24 @@ class _TambahSuratState extends State<TambahSurat> {
                     fontSize: 15,
                   ),
                   decoration: InputDecoration(
-                      labelText: 'Tanggal Terima',
-                      labelStyle: GoogleFonts.poppins(
-                        color: const Color.fromARGB(255, 151, 151, 151),
-                        fontSize: 14,
+                    labelText: 'Tanggal Terima',
+                    labelStyle: GoogleFonts.poppins(
+                      color: const Color.fromARGB(255, 151, 151, 151),
+                      fontSize: 14,
+                    ),
+                    fillColor: const Color.fromARGB(255, 232, 232, 232),
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 151, 151, 151),
                       ),
-                      fillColor: const Color.fromARGB(255, 232, 232, 232),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.never),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Inputkan Tanggal Terima!';
@@ -142,24 +142,24 @@ class _TambahSuratState extends State<TambahSurat> {
                     fontSize: 15,
                   ),
                   decoration: InputDecoration(
-                      labelText: 'Perihal',
-                      labelStyle: GoogleFonts.poppins(
-                        color: const Color.fromARGB(255, 151, 151, 151),
-                        fontSize: 14,
+                    labelText: 'Perihal',
+                    labelStyle: GoogleFonts.poppins(
+                      color: const Color.fromARGB(255, 151, 151, 151),
+                      fontSize: 14,
+                    ),
+                    fillColor: const Color.fromARGB(255, 232, 232, 232),
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 151, 151, 151),
                       ),
-                      fillColor: const Color.fromARGB(255, 232, 232, 232),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.never),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Inputkan Perihal!';
@@ -177,24 +177,24 @@ class _TambahSuratState extends State<TambahSurat> {
                     fontSize: 15,
                   ),
                   decoration: InputDecoration(
-                      labelText: 'Tanggal Surat',
-                      labelStyle: GoogleFonts.poppins(
-                        color: const Color.fromARGB(255, 151, 151, 151),
-                        fontSize: 14,
+                    labelText: 'Tanggal Surat',
+                    labelStyle: GoogleFonts.poppins(
+                      color: const Color.fromARGB(255, 151, 151, 151),
+                      fontSize: 14,
+                    ),
+                    fillColor: const Color.fromARGB(255, 232, 232, 232),
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 151, 151, 151),
                       ),
-                      fillColor: const Color.fromARGB(255, 232, 232, 232),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.never),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Inputkan Tanggal Surat!';
@@ -212,24 +212,24 @@ class _TambahSuratState extends State<TambahSurat> {
                     fontSize: 15,
                   ),
                   decoration: InputDecoration(
-                      labelText: 'Nomor Surat',
-                      labelStyle: GoogleFonts.poppins(
-                        color: const Color.fromARGB(255, 151, 151, 151),
-                        fontSize: 14,
+                    labelText: 'Nomor Surat',
+                    labelStyle: GoogleFonts.poppins(
+                      color: const Color.fromARGB(255, 151, 151, 151),
+                      fontSize: 14,
+                    ),
+                    fillColor: const Color.fromARGB(255, 232, 232, 232),
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 151, 151, 151),
                       ),
-                      fillColor: const Color.fromARGB(255, 232, 232, 232),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.never),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Inputkan Nomor Surat!';
@@ -260,11 +260,10 @@ class _TambahSuratState extends State<TambahSurat> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 151, 151, 151),
                         ),
                         borderRadius: BorderRadius.circular(10),
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.never),
+                      )),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Inputkan Asal Surat!';

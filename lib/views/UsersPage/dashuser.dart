@@ -94,15 +94,42 @@ class _DashboardUserState extends State<DashboardUser> {
                       Container(
                         padding: const EdgeInsets.only(top: 50.0, left: 145.0),
                         child: IconButton(
-                            icon: const Icon(Icons.logout_rounded),
-                            iconSize: 25,
-                            color: Colors.white,
-                            onPressed: (() {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Login()));
-                            })),
+                          icon: const Icon(Icons.logout_rounded),
+                          iconSize: 25,
+                          color: Colors.white,
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text("Konfirmasi"),
+                                  content: const Text(
+                                      "Apakah Anda yakin ingin keluar?"),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text("Batal"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: const Text("Ya"),
+                                      onPressed: () {
+                                        FirebaseAuth.instance.signOut();
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Login()),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
@@ -135,7 +162,7 @@ class _DashboardUserState extends State<DashboardUser> {
                     left: 35,
                     top: 315,
                     child: textView(
-                        "Aktivitas Hari ini :",
+                        "Aktivitas Bulan ini :",
                         17,
                         const Color(0xFF315A8A),
                         FontWeight.bold,
@@ -161,7 +188,7 @@ class _DashboardUserState extends State<DashboardUser> {
                         children: [
                           dashboardDiproses(0),
                           const SizedBox(width: 25),
-                          dashboardSelesai(1),
+                          dashboardSelesai(0),
                         ],
                       )),
                 ],

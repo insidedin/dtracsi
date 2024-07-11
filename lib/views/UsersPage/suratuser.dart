@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dtracsi/views/AdminUse/cetaksurat.dart';
 import 'package:dtracsi/views/AdminUse/editsurat.dart';
+import 'package:dtracsi/views/Surat/detailsurat.dart';
 import 'package:dtracsi/widgets/appbarview.dart';
 import 'package:dtracsi/widgets/textview.dart';
 import 'package:flutter/material.dart';
@@ -125,57 +125,12 @@ class _SuratUserState extends State<SuratUser> {
                     fontFamily: GoogleFonts.poppins().fontFamily,
                   ),
                 ),
-                trailing: PopupMenuButton<String>(
-                  itemBuilder: (BuildContext context) =>
-                      <PopupMenuEntry<String>>[
-                    PopupMenuItem<String>(
-                      value: 'edit',
-                      child: ListTile(
-                        leading: const Icon(Icons.edit_document),
-                        title: textView(
-                          "Edit",
-                          14,
-                          Colors.black,
-                          FontWeight.w500,
-                          TextAlign.start,
-                          const EdgeInsets.all(0),
-                        ),
-                      ),
-                    ),
-                    PopupMenuItem<String>(
-                      value: 'delete',
-                      child: ListTile(
-                        leading: const Icon(Icons.delete_forever_rounded),
-                        title: textView(
-                          "Hapus",
-                          14,
-                          Colors.black,
-                          FontWeight.w500,
-                          TextAlign.start,
-                          const EdgeInsets.all(0),
-                        ),
-                      ),
-                    ),
-                  ],
-                  onSelected: (String value) {
-                    if (value == 'edit') {
-                      editSurat(data, doc.id);
-                    } else if (value == 'delete') {
-                      deleteSurat(doc.id);
-                    }
-                  },
-                ),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CetakSurat(
-                        nomorAgenda: data['nomor_agenda'],
-                        tanggalTerima: data['tanggal_terima'],
-                        perihal: data['perihal'],
-                        tanggalSurat: data['tanggal_surat'],
-                        nomorSurat: data['nomor_surat'],
-                        asalSurat: data['asal_surat'],
+                      builder: (context) => DetailSurat(
+                        suratData: data,
                       ),
                     ),
                   );

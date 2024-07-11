@@ -19,6 +19,7 @@ class DetailSurat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: appBarCustom2(
           "Detail Surat",
           () => navigationPop(context, const Tracking()),

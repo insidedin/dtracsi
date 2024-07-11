@@ -50,19 +50,16 @@ class _LoginState extends State<Login> {
             );
           }
       } else {
-          // Handle wrong password
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Password salah')),
           );
         }
     } else {
-        // Handle user not found
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Username tidak ditemukan')),
         );
       }
   }catch (e) {
-      // Handle errors
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );

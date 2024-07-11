@@ -22,19 +22,16 @@ class _TrackingState extends State<Tracking> {
     String nomorAgenda = agendaController.text.trim();
     if (nomorAgenda.isNotEmpty) {
       try {
-        // Query to search for surat data based on nomor agenda
         QuerySnapshot suratSnapshot = await FirebaseFirestore.instance
             .collection('surat')
             .where('nomor_agenda',
                 isEqualTo: int.parse(
-                    nomorAgenda)) // Assuming nomor_agenda is stored as a number
+                    nomorAgenda))
             .get();
 
         if (suratSnapshot.docs.isNotEmpty) {
-          // Get the first surat document data
           var suratData = suratSnapshot.docs[0].data() as Map<String, dynamic>;
 
-          // Navigate to the detail surat page
           Navigator.push(
             context,
             MaterialPageRoute(
