@@ -35,7 +35,7 @@ appBarSplash() {
 appBarSurat(String nama, ditekan) {
   return AppBar(
     elevation: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: const Color.fromARGB(255, 235, 235, 235),
     title: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -66,7 +66,7 @@ appBarSurat(String nama, ditekan) {
 appBarCustom(String nama) {
   return AppBar(
     elevation: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: const Color.fromARGB(255, 235, 235, 235),
     title: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -85,7 +85,7 @@ appBarCustom(String nama) {
 appBarCustom2(String nama, ditekan, ukuran) {
   return AppBar(
     elevation: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: const Color.fromARGB(255, 235, 235, 235),
     title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       SizedBox(
         height: 50,
@@ -108,7 +108,7 @@ appBarCustom2(String nama, ditekan, ukuran) {
 appBarCustom3(String nama, ditekan) {
   return AppBar(
     elevation: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: const Color.fromARGB(255, 235, 235, 235),
     title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       SizedBox(
         height: 50,
@@ -128,4 +128,32 @@ appBarCustom3(String nama, ditekan) {
   );
 }
 
-
+appBarNotif(ditekan) {
+  return AppBar(
+    elevation: 0,
+    backgroundColor: const Color.fromARGB(255, 235, 235, 235),
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        textView("Pengajuan Surat", 17, const Color(0xFF315A8A),
+            FontWeight.bold, TextAlign.start, const EdgeInsets.only(left: 13)),
+        Padding(
+          padding: const EdgeInsets.only(right: 3.0),
+          child: IconButton(
+            icon: const Icon(
+              Icons.notifications,
+              color: Color(0xFF315A8A),
+              size: 25.0,
+            ),
+            onPressed: ditekan,
+          ),
+        ),
+      ],
+    ),
+    shape: const RoundedRectangleBorder(
+      borderRadius:
+          BorderRadius.only(bottomLeft: Radius.zero, bottomRight: Radius.zero),
+    ),
+    automaticallyImplyLeading: false,
+  );
+}

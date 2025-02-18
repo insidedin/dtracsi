@@ -271,3 +271,86 @@ dashboardSelesai(jumlahSelesai) {
     ),
   );
 }
+
+pengaturanUser(icon, pengguna, VoidCallback onTap) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      width: 160,
+      height: 160,
+      decoration: ShapeDecoration(
+        color: const Color.fromARGB(255, 235, 235, 235),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        shadows: const [
+          BoxShadow(
+            color: Color(0x3F000000),
+            blurRadius: 4,
+            offset: Offset(0, 4),
+            spreadRadius: 0,
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          icon,
+          const SizedBox(height: 8),
+          textView(pengguna, 16, const Color.fromARGB(255, 18, 52, 92),
+              FontWeight.w700, TextAlign.start, const EdgeInsets.all(0)),
+        ],
+      ),
+    ),
+  );
+}
+
+dashboardDiajukan(jumlahSurat) {
+  return Container(
+    width: 160,
+    height: 130,
+    decoration: ShapeDecoration(
+      color: const Color.fromARGB(255, 235, 235, 235),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      shadows: const [
+        BoxShadow(
+          color: Color(0x3F000000),
+          blurRadius: 4,
+          offset: Offset(0, 4),
+          spreadRadius: 0,
+        ),
+      ],
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              width: 25,
+            ),
+            const Icon(Icons.add_to_photos_rounded,
+                size: 50, color: Color.fromARGB(255, 18, 52, 92)),
+            const SizedBox(
+              width: 8,
+            ),
+            textView(
+                jumlahSurat.toString(),
+                30,
+                const Color.fromARGB(255, 18, 52, 92),
+                FontWeight.bold,
+                TextAlign.start,
+                const EdgeInsets.all(0)),
+          ],
+        ),
+        const SizedBox(height: 8),
+        textView("Surat Diajukan", 16, const Color.fromARGB(255, 18, 52, 92),
+            FontWeight.w600, TextAlign.start, const EdgeInsets.all(0)),
+      ],
+    ),
+  );
+}
+

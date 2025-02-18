@@ -1,109 +1,94 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dtracsi/views/HomePage/home.dart';
-import 'package:dtracsi/views/HomePage/homepts.dart';
-import 'package:dtracsi/views/HomePage/homeuser.dart';
-import 'package:dtracsi/views/Login/register.dart';
+import 'package:dtracsi/views/Login/login.dart';
 import 'package:dtracsi/widgets/inputview.dart';
 import 'package:dtracsi/widgets/textview.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+class _RegisterState extends State<Register> {
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController ptsController = TextEditingController();
   bool passwordVisible = false;
 
-  void togglePasswordVisibility() {
-    setState(() {
-      passwordVisible = !passwordVisible;
-    });
-  }
+  Future<void> registerPTS() async {
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  void navigateToRegister() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const Register()),
-    );
-  }
-
-  Future<void> login() async {
+  String email = emailController.text.trim();
   String username = usernameController.text.trim();
   String password = passwordController.text.trim();
+  String asalPT = ptsController.text.trim();
+
+  // Validasi dasar
+  if (email.isEmpty || username.isEmpty || password.isEmpty || asalPT.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Semua field harus diisi')),
+    );
+    return;
+  }
 
   try {
-    // Cek di collection 'users'
-    QuerySnapshot userSnapshot = await firestore
-        .collection('users')
-        .where('username', isEqualTo: username)
-        .limit(1)
-        .get();
-
-    if (userSnapshot.docs.isNotEmpty) {
-      var userDoc = userSnapshot.docs[0];
-      var userData = userDoc.data() as Map<String, dynamic>;
-
-      if (userData['password'] == password) {
-        String role = userData['role'];
-
-        if (role == 'admin') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const Home()),
-          );
-        } else if (role == 'user') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const HomeUser()),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Password salah')),
-        );
-      }
-    } else {
-      // Jika tidak ditemukan di 'users', cek di collection 'pts'
-      QuerySnapshot ptsSnapshot = await firestore
-          .collection('pts')
-          .where('username', isEqualTo: username)
-          .limit(1)
-          .get();
-
-      if (ptsSnapshot.docs.isNotEmpty) {
-        var ptsDoc = ptsSnapshot.docs[0];
-        var ptsData = ptsDoc.data() as Map<String, dynamic>;
-
-        if (ptsData['password'] == password) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const HomePts()),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Password salah')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Username tidak ditemukan')),
-        );
-      }
+    // Cek apakah email sudah terdaftar
+    var emailCheck = await firestore.collection('pts').where('email', isEqualTo: email).get();
+    if (emailCheck.docs.isNotEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Email sudah terdaftar')),
+      );
+      return;
     }
+
+    // Tambahkan data ke Firestore
+    await firestore.collection('pts').add({
+      'email': email,
+      'username': username,
+      'password': password, // Ingat: ini tidak aman untuk produksi
+      'asalPT': asalPT,
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Registrasi berhasil')),
+    );
+
+    // Bersihkan form dan navigasi
+    emailController.clear();
+    usernameController.clear();
+    passwordController.clear();
+    ptsController.clear();
+    navigateToLogin();
   } catch (e) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Error: $e')),
     );
   }
 }
+  void togglePasswordVisibility() {
+    setState(() {
+      passwordVisible = !passwordVisible;
+    });
+  }
+
+  void navigateToLogin() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Login()),
+    );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
+    ptsController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +105,7 @@ class _LoginState extends State<Login> {
                 child: Stack(
                   children: [
                     Positioned(
-                      left: -139,
+                      left: -50,
                       top: -156,
                       child: Container(
                         width: 600,
@@ -163,13 +148,12 @@ class _LoginState extends State<Login> {
                           const EdgeInsets.all(0)),
                     ),
                     //////////
-
                     /// Mulai
                     Positioned(
                       left: 50,
-                      top: 325,
+                      top: 310,
                       child: textView(
-                          "Selamat Datang",
+                          "Register Akun DTRACSI",
                           18,
                           const Color(0xFF315A8A),
                           FontWeight.bold,
@@ -178,17 +162,16 @@ class _LoginState extends State<Login> {
                     ),
                     //////////
                     Positioned(
-                      left: 50,
-                      top: 350,
-                      child: textView(
-                          "di Aplikasi Digital Tracking Disposisi LLDIKTI II",
-                          15,
-                          const Color(0xFF315A8A),
-                          FontWeight.w600,
-                          TextAlign.start,
-                          const EdgeInsets.all(0)),
-                    ),
-                    //////////
+                        left: 50,
+                        top: 350,
+                        child: inputUserController(
+                            emailController,
+                            const Icon(Icons.email_rounded,
+                                color: Color.fromARGB(255, 142, 142, 142),
+                                size: 20),
+                            "Email",
+                            context)),
+                    ///////////
                     Positioned(
                         left: 50,
                         top: 420,
@@ -204,15 +187,26 @@ class _LoginState extends State<Login> {
                         togglePasswordVisibility, context),
                     ///////////
                     Positioned(
+                        left: 50,
+                        top: 563,
+                        child: inputUserController(
+                            ptsController,
+                            const Icon(Icons.school_rounded,
+                                color: Color.fromARGB(255, 142, 142, 142),
+                                size: 20),
+                            "Asal Perguruan Tinggi",
+                            context)),
+                    ///////////
+                    Positioned(
                       left: 100,
-                      top: 600,
+                      top: 657,
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width - 200,
                         height: 60,
                         child: Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: ElevatedButton(
-                            onPressed: login,
+                            onPressed: registerPTS, // Ubah ini
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF315A8A),
                               shape: RoundedRectangleBorder(
@@ -220,7 +214,7 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             child: textView(
-                                "MASUK",
+                                "REGISTER",
                                 18,
                                 Colors.white,
                                 FontWeight.bold,
@@ -231,23 +225,23 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     Positioned(
-                        left: 87,
-                        top: 700,
+                        left: 100,
+                        top: 740,
                         child: Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               textView(
-                                  "Belum memiliki akun?",
+                                  "Sudah punya akun?",
                                   14,
                                   Colors.black,
                                   FontWeight.normal,
                                   TextAlign.center,
                                   const EdgeInsets.all(0)),
                               TextButton(
-                                onPressed: navigateToRegister,
+                                onPressed: navigateToLogin,
                                 child: textView(
-                                    "Register disini",
+                                    "Masuk disini",
                                     14,
                                     const Color(0xFF315A8A),
                                     FontWeight.bold,

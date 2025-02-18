@@ -1,7 +1,7 @@
 import 'package:dtracsi/views/AdminPage/dashboardpage.dart';
+import 'package:dtracsi/views/AdminPage/pengaturanpage.dart';
 import 'package:dtracsi/views/AdminPage/suratpage.dart';
 import 'package:dtracsi/views/AdminPage/trackingpage.dart';
-import 'package:dtracsi/views/AdminPage/userpage.dart';
 import 'package:dtracsi/views/Scanner/scanqr.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
     const Dashboard(),
     const ManSurat(),
     const Tracking(),
-    const UserPage()
+    const Pengaturan()
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
@@ -144,7 +144,7 @@ class _HomeState extends State<Home> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const UserPage();
+                        currentScreen = const Pengaturan();
                         currentTab = 3;
                       });
                     },
