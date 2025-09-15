@@ -9,3 +9,5 @@ Buka Code Editor Visual Studio Code atau Android Studio
 3. tunggu proses download library depedencies hingga selesai
 4. jalankan program flutter dengan klik fn+f5 atau run
 
+
+Dtracsi
